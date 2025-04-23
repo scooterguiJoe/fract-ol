@@ -6,7 +6,7 @@
 /*   By: guvascon <guvascon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:51:26 by guvascon          #+#    #+#             */
-/*   Updated: 2025/04/23 16:02:19 by guvascon         ###   ########.fr       */
+/*   Updated: 2025/04/23 17:16:28 by guvascon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,21 @@
 #define WIDTH 800
 #define HEIGHT 800
  
+#define BLACK       0x000000
+#define WHITE       0xFFFFFF
+#define RED         0xFF0000
+#define GREEN       0x00FF00
+#define BLUE        0x0000FF
+
+#define MAGENTA_BURST   0xFF00FF
+#define LIME_SHOCK      0xCCFF00
+#define NEON_ORANGE     0xFF6600
+#define PSYCHEDELIC_PURPLE 0x660066 
+#define AQUA_DREAM      0x33CCCC  
+#define HOT_PINK        0xFF66B2  
+#define ELECTRIC_BLUE   0x0066FF  
+#define LAVA_RED        0xFF3300  
+
 typedef struct s_image
 {
 	void *image_ptr;
@@ -41,6 +56,7 @@ typedef struct s_fractol
 	void *mlx_window; //mlx_new_window()
 	t_image image;
 	double escape_value; //hipotenusa
+	int interations_def; //image quality and rendering speed
 }	t_fractol;
 
 typedef struct s_complex
@@ -59,6 +75,7 @@ static void	malloc_error(void);
 void	fractol_init(t_fractol *fractol);
 
 //render.c
+static void ft_mypixelput(int x, int y, t_image *image, int color);
 void	ft_handlepixel(int x, int y, t_fractol *fractol);
 void	ft_fractolrender(t_fractol *fractol);
 

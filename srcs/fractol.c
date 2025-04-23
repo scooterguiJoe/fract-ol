@@ -6,7 +6,7 @@
 /*   By: guvascon <guvascon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:57:17 by guvascon          #+#    #+#             */
-/*   Updated: 2025/04/23 14:00:31 by guvascon         ###   ########.fr       */
+/*   Updated: 2025/04/23 17:04:53 by guvascon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int main(int ac, char **av)
 	{
 		fractol.name = av[1];
 		fractol_init(&fractol);
-		fractol_render(&fractol);
+		ft_fractolrender(&fractol);
 		mlx_loop(fractol.mlx_connection);
 	}
 	else

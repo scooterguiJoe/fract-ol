@@ -6,7 +6,7 @@
 /*   By: guvascon <guvascon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 13:28:10 by guvascon          #+#    #+#             */
-/*   Updated: 2025/04/23 16:03:15 by guvascon         ###   ########.fr       */
+/*   Updated: 2025/04/23 17:17:32 by guvascon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 static void	malloc_error(void)
 {
-	ft_error("problem with malloc");
+	printf("Problems with malloc");
 	exit(EXIT_FAILURE);
 }
 void	data_init(t_fractol *fractol)
 {
 	fractol->escape_value = 4;
-	
+	fractol->interations_def = 42;
 }
 void	fractol_init(t_fractol *fractol)
 {

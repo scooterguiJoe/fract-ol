@@ -6,11 +6,12 @@
 #    By: guvascon <guvascon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/22 14:52:07 by guvascon          #+#    #+#              #
-#    Updated: 2025/04/22 15:01:32 by guvascon         ###   ########.fr        #
+#    Updated: 2025/04/23 17:11:22 by guvascon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = srcs/fractol.c
+SRCS = srcs/fractol.c srcs/init.c srcs/math_utils.c srcs/render.c \
+		srcs/string_utils.c
 		
 OBJS = $(SRCS:.c=.o)
 
@@ -20,8 +21,8 @@ RM = rm -f
 
 # PRINTF_PATH = ./ft_printf
 # PRINTF = $(PRINTF_PATH)/libftprintf.a
-LIBFT_PATH = ./Libft
-LIBFT = $(LIBFT_PATH)/libft.a
+# LIBFT_PATH = ./Libft
+# LIBFT = $(LIBFT_PATH)/libft.a
 
 NAME = fractol
 
@@ -30,17 +31,12 @@ MLX = $(MLX_DIR)/libmlx.a
 MLXFLAGS = -lXext -lX11
 
 all : $(NAME) 
-$(NAME) : $(OBJS) $(PRINTF) $(MLX)
-	$(CC) $(CFLAGS) $(OBJS) $(PRINTF) $(LIBFT) $(MLX) $(MLXFLAGS) -o $(NAME)
+$(NAME) : $(OBJS)  $(MLX)
+	$(CC) $(CFLAGS) $(OBJS) $(MLX) $(MLXFLAGS) -o $(NAME)
 
 $(MLX):
 	@make -s -C ./minilibx-linux
 	
-$(LIBFT):
-	@echo " [ .. ] | Compiling.."
-	@make -s -C $(LIBFT_PATH)
-	@echo " [ OK ] | Ready!"
-
 clean:
 	@$(RM) $(OBJS) 
 	@$(RM) $(LIBFT_PATH)/*.o
@@ -48,7 +44,6 @@ clean:
 	
 fclean: clean
 	@$(RM) $(NAME)
-	@make -s fclean -C $(LIBFT_PATH)
 	clear
 	@echo "all files were removed"
 
