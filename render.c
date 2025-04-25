@@ -6,21 +6,22 @@
 /*   By: guvascon <guvascon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 14:00:53 by guvascon          #+#    #+#             */
-/*   Updated: 2025/04/23 17:14:34 by guvascon         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:21:38 by guvascon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fractol.h"
+#include "inc/fractol.h"
+#include "minilibx-linux/mlx.h"
 
 static void ft_mypixelput(int x, int y, t_image *image, int color)
 {
 	int offset;
 
 	offset = (y * image->line_len) + (x * (image->bits_per_pixel / 8));
-	*(unsigned int *)(image->bits_per_pixel + offset) = color;	
+	*(unsigned int *)(image->pixel_ptr + offset) = color;
 }
 
-void	ft_handlepixel(int x, int y, t_fractol *fractol)
+static void	ft_handlepixel(int x, int y, t_fractol *fractol)
 {
 	t_complex z;
 	t_complex c;
@@ -31,12 +32,12 @@ void	ft_handlepixel(int x, int y, t_fractol *fractol)
 	z.x = 0.0;
 	z.y = 0.0;
 	//pixel coordinate x & y 
-	c.x = map(x, -2, +2, 0, WIDTH);
-	c.y = map(y, +2, -2, 0, HEIGHT);
+	c.x = (map(x, -2, +2, 0, WIDTH)* fractol->zoom) + fractol->shift_x;
+	c.y = (map(y, +2, -2, 0, HEIGHT) * fractol->zoom) + fractol->shift_y;
 	while(i < fractol->interations_def)
 	{
 		z = sum_complex(square_complex(z), c);
-		if((z.x * z.x) + (z.y * z.y) > fractol->escape_value);
+		if((z.x * z.x) + (z.y * z.y) > fractol->escape_value)
 		{
 			color = map(i, BLACK, WHITE, 0, fractol->interations_def);
 			ft_mypixelput(x, y, &fractol->image, color);
@@ -44,7 +45,7 @@ void	ft_handlepixel(int x, int y, t_fractol *fractol)
 		}
 		++i;
 	}
-	ft_mypixelput(x, y, &fractol->image, PSYCHEDELIC_PURPLE);
+	ft_mypixelput(x, y, &fractol->image, WHITE);
 }
 
 void	ft_fractolrender(t_fractol *fractol)

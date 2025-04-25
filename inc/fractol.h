@@ -6,7 +6,7 @@
 /*   By: guvascon <guvascon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:51:26 by guvascon          #+#    #+#             */
-/*   Updated: 2025/04/23 17:16:28 by guvascon         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:19:50 by guvascon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <X11/keysym.h>
 # include <unistd.h>
 
-#define ERROR_MESSAGE "Please press enter\n"
+#define ERROR_MESSAGE "Please press enter\n \n\t\"./fractol mandelbrot\" or \n\t\"./fractol julia <value_1> <value_2>\"\n"
 #define WIDTH 800
 #define HEIGHT 800
  
@@ -57,6 +57,9 @@ typedef struct s_fractol
 	t_image image;
 	double escape_value; //hipotenusa
 	int interations_def; //image quality and rendering speed
+	double shift_x;
+	double shift_y;
+	double zoom;
 }	t_fractol;
 
 typedef struct s_complex
@@ -71,17 +74,24 @@ int	ft_strncmp(char *s1, char *s2, int n);
 void ft_putstr_fd(char *s, int fd);
 
 //init.c
-static void	malloc_error(void);
+// void	malloc_error(void);
+// void	data_init(t_fractol *fractol);
 void	fractol_init(t_fractol *fractol);
+//static void events_init(t_fractol *fractol);
 
 //render.c
-static void ft_mypixelput(int x, int y, t_image *image, int color);
-void	ft_handlepixel(int x, int y, t_fractol *fractol);
+// void ft_mypixelput(int x, int y, t_image *image, int color);
+// void	ft_handlepixel(int x, int y, t_fractol *fractol);
 void	ft_fractolrender(t_fractol *fractol);
 
 //math_utils
-double map(double unscale_num, double new_min, double new_max, double old_min, double old_max);
+double map(double unscaled_num, double new_min, double new_max, double old_min, double old_max);
 t_complex sum_complex(t_complex z1, t_complex z2);
 t_complex square_complex(t_complex z);
+
+//events.c
+int	ft_closehandler(t_fractol *fractol);
+int ft_keyhandle(int keysym, t_fractol *fractol);
+int ft_mousehandler(int buttom, int x, int y, t_fractol *fractol);
 
 #endif

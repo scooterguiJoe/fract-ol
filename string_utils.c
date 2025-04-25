@@ -6,11 +6,12 @@
 /*   By: guvascon <guvascon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:08:24 by guvascon          #+#    #+#             */
-/*   Updated: 2025/04/23 12:14:35 by guvascon         ###   ########.fr       */
+/*   Updated: 2025/04/24 15:31:25 by guvascon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fractol.h"
+#include "inc/fractol.h"
+#include "minilibx-linux/mlx.h"
 
 int	ft_strncmp(char *s1, char *s2, int n)
 {

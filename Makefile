@@ -6,17 +6,18 @@
 #    By: guvascon <guvascon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/22 14:52:07 by guvascon          #+#    #+#              #
-#    Updated: 2025/04/23 17:11:22 by guvascon         ###   ########.fr        #
+#    Updated: 2025/04/25 14:28:22 by guvascon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = srcs/fractol.c srcs/init.c srcs/math_utils.c srcs/render.c \
-		srcs/string_utils.c
+SRCS = fractol.c init.c math_utils.c render.c \
+		string_utils.c events.c
 		
 OBJS = $(SRCS:.c=.o)
 
 CC = @cc
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror -g -O3 -march=native -flto -ftree-vectorize -funroll-loops -ffast-math
+MLXFLAGS = -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 RM = rm -f
 
 # PRINTF_PATH = ./ft_printf
@@ -24,11 +25,11 @@ RM = rm -f
 # LIBFT_PATH = ./Libft
 # LIBFT = $(LIBFT_PATH)/libft.a
 
-NAME = fractol
+NAME = fract_ol
 
-MLX_DIR = minilibx-linux
+MLX_DIR = ./minilibx-linux
 MLX = $(MLX_DIR)/libmlx.a 
-MLXFLAGS = -lXext -lX11
+# MLXFLAGS = -lXext -lX11
 
 all : $(NAME) 
 $(NAME) : $(OBJS)  $(MLX)
@@ -39,7 +40,7 @@ $(MLX):
 	
 clean:
 	@$(RM) $(OBJS) 
-	@$(RM) $(LIBFT_PATH)/*.o
+	# @$(RM) $(MLX_DIR)/*.o
 	@echo "all objects were removed"
 	
 fclean: clean
