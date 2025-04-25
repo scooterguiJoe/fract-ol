@@ -6,7 +6,7 @@
 /*   By: guvascon <guvascon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:51:26 by guvascon          #+#    #+#             */
-/*   Updated: 2025/04/25 17:19:50 by guvascon         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:49:07 by guvascon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ typedef struct s_image
 {
 	void *image_ptr;
 	char *pixel_ptr;
-	int bits_per_pixel;
+	int bitsppixel;
 	int endian;
-	int line_len;
+	int llen;
 }	t_image;
 
 typedef struct s_fractol

@@ -6,18 +6,18 @@
 /*   By: guvascon <guvascon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:57:17 by guvascon          #+#    #+#             */
-/*   Updated: 2025/04/24 17:20:23 by guvascon         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:43:30 by guvascon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inc/fractol.h"
 #include "minilibx-linux/mlx.h"
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_fractol	fractol;
-	
-	if ((ac == 2 && !ft_strncmp(av[1], "mandelbrot", 10)) 
+
+	if ((ac == 2 && !ft_strncmp(av[1], "mandelbrot", 10)) \
 		|| (ac == 4 && !ft_strncmp(av[1], "julia", 5)))
 	{
 		fractol.name = av[1];

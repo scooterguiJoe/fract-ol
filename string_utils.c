@@ -6,7 +6,7 @@
 /*   By: guvascon <guvascon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:08:24 by guvascon          #+#    #+#             */
-/*   Updated: 2025/04/24 15:31:25 by guvascon         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:54:44 by guvascon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ int	ft_strncmp(char *s1, char *s2, int n)
 	return (*s1 - *s2);
 }
 
-void ft_putstr_fd(char *s, int fd)
+void	ft_putstr_fd(char *s, int fd)
 {
 	if (s == NULL || fd < 0)
 		return ;
 	if (*s != '\0')
 	{
 		write(fd, s, 1);
-		ft_putstr_fd(s + 1, fd); //recursion
+		ft_putstr_fd(s + 1, fd);
 	}
 }

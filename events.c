@@ -6,12 +6,11 @@
 /*   By: guvascon <guvascon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 17:13:47 by guvascon          #+#    #+#             */
-/*   Updated: 2025/04/25 17:29:54 by guvascon         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:42:41 by guvascon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inc/fractol.h"
-#include "minilibx-linux/mlx.h"
 
 int	ft_closehandler(t_fractol *fractol)
 {
@@ -21,39 +20,37 @@ int	ft_closehandler(t_fractol *fractol)
 	free(fractol->mlx_connection);
 	exit(EXIT_SUCCESS);
 }
-int ft_keyhandle(int keysym, t_fractol *fractol)
+
+int	ft_keyhandle(int keysym, t_fractol *fractol)
 {
-	if(keysym == XK_Escape)
+	if (keysym == XK_Escape)
 		ft_closehandler(fractol);
-	else if(keysym == XK_Right)
+	else if (keysym == XK_Right)
 		fractol->shift_x -= (0.5 * fractol->zoom);
-	else if(keysym == XK_Left)
+	else if (keysym == XK_Left)
 		fractol->shift_x += (0.5 * fractol->zoom);
-	else if(keysym == XK_Up)
+	else if (keysym == XK_Up)
 		fractol->shift_y -= (0.5 * fractol->zoom);
-	else if(keysym == XK_Down)
+	else if (keysym == XK_Down)
 		fractol->shift_y += (0.5 * fractol->zoom);
-	else if(keysym == XK_plus)
+	else if (keysym == XK_plus)
 		fractol->interations_def += 10;
-	else if(keysym == XK_minus)
+	else if (keysym == XK_minus)
 		fractol->interations_def -= 10;
 	ft_fractolrender(fractol);
-	return 0;
+	return (0);
 }
 
-int ft_mousehandler(int buttom, int x, int y, t_fractol *fractol)
+int	ft_mousehandler(int buttom, int x, int y, t_fractol *fractol)
 {
-	//zoom in
-	if(buttom == Button5)
+	if (buttom == Button5)
 	{
 		fractol->zoom *= 0.95;
 	}
-	//zoom out
-	else if(buttom == Button4)
+	else if (buttom == Button4)
 	{
 		fractol->zoom *= 1.05;
 	}
-	//refresh
 	ft_fractolrender(fractol);
-	return 0;
+	return (0);
 }
