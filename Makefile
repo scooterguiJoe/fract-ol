@@ -6,7 +6,7 @@
 #    By: guvascon <guvascon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/22 14:52:07 by guvascon          #+#    #+#              #
-#    Updated: 2025/05/11 13:26:05 by guvascon         ###   ########.fr        #
+#    Updated: 2025/05/12 17:46:14 by guvascon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ RM = rm -f
 # LIBFT_PATH = ./Libft
 # LIBFT = $(LIBFT_PATH)/libft.a
 
-NAME = fract_ol
+NAME = fractol
 
 MLX_DIR = ./minilibx-linux
 MLX = $(MLX_DIR)/libmlx.a 
