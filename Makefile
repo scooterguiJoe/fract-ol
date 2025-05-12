@@ -6,18 +6,17 @@
 #    By: guvascon <guvascon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/22 14:52:07 by guvascon          #+#    #+#              #
-#    Updated: 2025/04/25 14:28:22 by guvascon         ###   ########.fr        #
+#    Updated: 2025/05/11 13:26:05 by guvascon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = fractol.c init.c math_utils.c render.c \
-		string_utils.c events.c
+SRCS = srcs/fractol.c srcs/init.c srcs/math_utils.c srcs/render.c \
+		srcs/string_utils.c srcs/events.c
 		
 OBJS = $(SRCS:.c=.o)
 
 CC = @cc
 CFLAGS = -g -Wall -Wextra -Werror -g -O3 -march=native -flto -ftree-vectorize -funroll-loops -ffast-math
-MLXFLAGS = -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 RM = rm -f
 
 # PRINTF_PATH = ./ft_printf
@@ -29,7 +28,8 @@ NAME = fract_ol
 
 MLX_DIR = ./minilibx-linux
 MLX = $(MLX_DIR)/libmlx.a 
-# MLXFLAGS = -lXext -lX11
+MLXFLAGS = -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -Lminilibx-linux
+
 
 all : $(NAME) 
 $(NAME) : $(OBJS)  $(MLX)

@@ -6,12 +6,11 @@
 /*   By: guvascon <guvascon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 14:00:53 by guvascon          #+#    #+#             */
-/*   Updated: 2025/04/25 17:54:13 by guvascon         ###   ########.fr       */
+/*   Updated: 2025/05/11 13:31:27 by guvascon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/fractol.h"
-#include "minilibx-linux/mlx.h"
+#include "../inc/fractol.h"
 
 static void	ft_mypixelput(int x, int y, t_image *image, int color)
 {
@@ -19,6 +18,20 @@ static void	ft_mypixelput(int x, int y, t_image *image, int color)
 
 	offset = (y * image->llen) + (x * (image->bitsppixel / 8));
 	*(unsigned int *)(image->pixel_ptr + offset) = color;
+}
+
+static void	mandelbrot_vs_julia(t_complex *z, t_complex *c, t_fractol *fractol)
+{
+	if (!ft_strncmp(fractol->name, "julia", 5))
+	{
+		c->x = fractol->julia_x;
+		c->y = fractol->julia_y;
+	}
+	else
+	{
+		c->x = z->x;
+		c->y = z->y;
+	}
 }
 
 static void	ft_handlepixel(int x, int y, t_fractol *fractol)
@@ -29,17 +42,15 @@ static void	ft_handlepixel(int x, int y, t_fractol *fractol)
 	int			color;
 
 	i = 0;
-	z.x = 0.0;
-	z.y = 0.0;
-	c.x = (map(x, -2, +2, 0, WIDTH) * fractol->zoom) \
-	+ fractol->shift_x;
-	c.y = (map(y, +2, -2, 0, HEIGHT) * fractol->zoom) + fractol->shift_y;
+	z.x = (map(x, -2, +2, WIDTH) * fractol->zoom) + fractol->shift_x;
+	z.y = (map(y, +2, -2, HEIGHT) * fractol->zoom) + fractol->shift_y;
+	mandelbrot_vs_julia(&z, &c, fractol);
 	while (i < fractol->interations_def)
 	{
 		z = sum_complex(square_complex(z), c);
 		if ((z.x * z.x) + (z.y * z.y) > fractol->escape_value)
 		{
-			color = map(i, BLACK, WHITE, 0, fractol->interations_def);
+			color = map(i, BLACK, WHITE, fractol->interations_def);
 			ft_mypixelput(x, y, &fractol->image, color);
 			return ;
 		}

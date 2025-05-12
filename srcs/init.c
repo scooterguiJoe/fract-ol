@@ -6,16 +6,15 @@
 /*   By: guvascon <guvascon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 13:28:10 by guvascon          #+#    #+#             */
-/*   Updated: 2025/04/25 17:49:49 by guvascon         ###   ########.fr       */
+/*   Updated: 2025/05/11 13:29:44 by guvascon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/fractol.h"
-#include "minilibx-linux/mlx.h"
+#include "../inc/fractol.h"
 
 static void	malloc_error(void)
 {
-	perror("Problems with malloc");
+	perror("malloc error");
 	exit(EXIT_FAILURE);
 }
 
@@ -36,6 +35,8 @@ static void	events_init(t_fractol *fractol)
 	ft_mousehandler, fractol);
 	mlx_hook(fractol->mlx_window, DestroyNotify, StructureNotifyMask, \
 	ft_closehandler, fractol);
+	mlx_hook(fractol->mlx_window, MotionNotify, PointerMotionMask, \
+	ft_juliatrack, fractol);
 }
 
 void	fractol_init(t_fractol *fractol)
@@ -55,8 +56,7 @@ void	fractol_init(t_fractol *fractol)
 	WIDTH, HEIGHT);
 	if (fractol->image.image_ptr == NULL)
 	{
-		mlx_destroy_window(fractol->mlx_connection, \
-		fractol->mlx_window);
+		mlx_destroy_window(fractol->mlx_connection, fractol->mlx_window);
 		mlx_destroy_display(fractol->mlx_connection);
 		free(fractol->mlx_connection);
 		malloc_error();
